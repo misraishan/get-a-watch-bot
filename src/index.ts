@@ -54,7 +54,7 @@ async function getTime(interaction: ChatInputCommandInteraction<CacheType>) {
             const time = moment().tz(userTimezone.timezone).format(tzFormat);
             await interaction.reply(`The time for <@${user.id}> is ${time} in ${userTimezone.timezone}!`);
         } else {
-            await interaction.reply("The user " + user.tag + " has not set their timezone yet!");
+            await interaction.reply("" + user.username + " has not set their timezone yet!");
         }
     } else {
         const time = moment().tz(timezone).format(tzFormat);
@@ -89,6 +89,16 @@ async function getTimeStamp(interaction: ChatInputCommandInteraction<CacheType>)
     let timezone = interaction.options.get("timezone")?.value as string;
     const ephemeral = interaction.options.get("public")?.value as boolean;
 
+    if (month > 12 || month < 1) {
+        await interaction.reply({content: "Please provide a valid month!", ephemeral: true});
+        return;
+    }
+
+    if (date > 31 || date < 1) {
+        await interaction.reply({content: "Please provide a valid date!", ephemeral: true});
+        return;
+    }
+
     if (!timezone) {
         const user = await db.user.findUnique({
             where: {
@@ -121,8 +131,9 @@ async function getTimeStamp(interaction: ChatInputCommandInteraction<CacheType>)
     })
 
     let timestamp;
-    const timestampDateFormatted = timestampDate.format(new Date(`${monthToUse}/${date}/${yearToUse} ${time}`));
+    let timestampDateFormatted;
     try {
+        timestampDateFormatted = timestampDate.format(new Date(`${monthToUse}/${date}/${yearToUse} ${time}`));
         timestamp = new Date(timestampDateFormatted);
     } catch (error) {
         await interaction.reply({content: "Invalid date or time!", ephemeral: true});
@@ -136,7 +147,7 @@ async function getTimeStamp(interaction: ChatInputCommandInteraction<CacheType>)
 
     await interaction.reply({
         content: `The timestamp for ${inlineCode(timestamp.toDateString())} at ${time} in ${timezone} is ${inlineCode(djsTime)}!`,
-        ephemeral: ephemeral
+        ephemeral: !ephemeral
     })
 
 }
