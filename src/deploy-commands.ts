@@ -77,9 +77,26 @@ const commands = [
         .setRequired(false)
         .setAutocomplete(true);
     }),
+
+    new SlashCommandBuilder()
+    .setName("time")
+    .setDescription("Get the time in a specific timezone or user.")
+    .addStringOption((opt) => {
+      return opt
+        .setName("timezone")
+        .setDescription("Write your timezone.")
+        .setRequired(false)
+        .setAutocomplete(true);
+    })
+    .addUserOption((opt) => {
+      return opt
+        .setName("user")
+        .setDescription("Write the user you want to get the time for.")
+        .setRequired(false)
+    }),
 ];
 
-config({ path: "../.env" });
+config();
 const token: string = process.env.TOKEN as string;
 const rest = new REST({ version: "10" }).setToken(token);
 (async () => {
