@@ -1,5 +1,10 @@
 import { ChatInputCommandInteraction, CacheType, inlineCode, time as djstime } from "discord.js";
 import { db } from "..";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc"
+import DayJSTimezone from "dayjs/plugin/timezone"
+dayjs.extend(utc)
+dayjs.extend(DayJSTimezone)
 
 export async function getTimeStamp(interaction: ChatInputCommandInteraction<CacheType>) {
     const time = interaction.options.get("time")?.value as string;
@@ -53,21 +58,19 @@ export async function getTimeStamp(interaction: ChatInputCommandInteraction<Cach
     let timestamp;
     let timestampDateFormatted;
     try {
-        timestampDateFormatted = timestampDate.format(new Date(`${monthToUse}/${date}/${yearToUse} ${time}`));
-        timestamp = new Date(timestampDateFormatted);
+        timestamp = dayjs.tz(`${yearToUse}-${monthToUse}-${date} ${time}`, timezone).valueOf();
+        timestampDateFormatted = timestampDate.format(timestamp);
     } catch (error) {
+        console.warn(error);
         await interaction.reply({content: "Invalid date or time!", ephemeral: true});
         return;
     }
     
-    const sec = Math.floor(timestamp.getTime() / 1000);
-    const format = interaction.options.get("format")?.value as string
-
-    const djsTime = djstime(sec, format as any);
+    const sec = Math.floor(timestamp / 1000);
+    const djsTime = djstime(sec, interaction.options.get("format")?.value as any);
 
     await interaction.reply({
-        content: `The timestamp for ${inlineCode(timestamp.toDateString())} at ${time} in ${timezone} is ${inlineCode(djsTime)}!`,
+        content: `The timestamp for ${inlineCode(timestampDateFormatted)} in ${timezone} is ${inlineCode(djsTime)}!`,
         ephemeral: !ephemeral
     })
-
 }
