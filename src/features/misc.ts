@@ -8,7 +8,7 @@ export async function info(interaction: ChatInputCommandInteraction<CacheType>) 
         .addFields(
             {
                 name: "Invite",
-                value: "[Invite the bot](https://discord.com/api/oauth2/authorize?client_id=888888888888888888&permissions=0&scope=applications.commands%20bot)",
+                value: "[Invite the bot](https://discord.com/api/oauth2/authorize?client_id=1036515690674405407&permissions=10737469504&scope=bot)",
             },
             {
                 name: "Source Code",
@@ -16,7 +16,7 @@ export async function info(interaction: ChatInputCommandInteraction<CacheType>) 
             },
             {
                 name: "Support Server",
-                value: "[Join the support server](https://discord.gg/888888888888888888)",
+                value: "[Join the support server](https://discord.gg/Z8qkEJMp5w)",
             },
             {
                 name: "Commands",
