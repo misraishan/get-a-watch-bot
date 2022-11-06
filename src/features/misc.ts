@@ -54,6 +54,10 @@ export async function commands(interaction: ChatInputCommandInteraction<CacheTyp
                 value: "Sets your timezone",
             },
             {
+                name: "/timestamp",
+                value: "Converts a time and date in your local timezone to a discord dynamic timestamp",
+            },
+            {
                 name: "/reminder",
                 value: "Sets a reminder\nThe bot will DM you when the reminder is due",
             },
