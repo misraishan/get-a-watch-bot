@@ -53,6 +53,37 @@ const months = [
   },
 ];
 
+const formatOptions = [
+  {
+    name: "Hours:Minutes",
+    value: "t",
+  },
+  {
+    name: "Hours:Minutes:Seconds",
+    value: "T",
+  },
+  {
+    name: "Date/Month/Year",
+    value: "d",
+  },
+  {
+    name: "Date Month Year",
+    value: "D",
+  },
+  {
+    name: "Date Month Year Hours:Minutes",
+    value: "f",
+  },
+  {
+    name: "Day, Date Month Year Hours:Minutes",
+    value: "F",
+  },
+  {
+    name: "Relative Time",
+    value: "R",
+  }
+];
+
 const commands = [
   // Command to get time
   new SlashCommandBuilder()
@@ -75,36 +106,7 @@ const commands = [
         .setName("format")
         .setDescription("The format you want to get the time in")
         .setRequired(true)
-        .addChoices(
-          {
-            name: "Hours:Minutes",
-            value: "t",
-          },
-          {
-            name: "Hours:Minutes:Seconds",
-            value: "T",
-          },
-          {
-            name: "Date/Month/Year",
-            value: "d",
-          },
-          {
-            name: "Date Month Year",
-            value: "D",
-          },
-          {
-            name: "Date Month Year Hours:Minutes",
-            value: "f",
-          },
-          {
-            name: "Day, Date Month Year Hours:Minutes",
-            value: "F",
-          },
-          {
-            name: "Relative Time",
-            value: "R",
-          }
-        );
+        .addChoices(...formatOptions);
     })
     .addStringOption((opt) => {
       return opt
@@ -152,24 +154,38 @@ const commands = [
     }),
 
   // Command to remind the user when a specific time is hit
+  // Input: Time, Date, Month, Year, Timezone, Message
   new SlashCommandBuilder()
-    .setName("remind")
+    .setName("reminder")
     .setDescription(
-      "Remind the user when a speimage.pngimage.pngimage.pngcific time is hit."
+      "Remind the user when a specific time is hit."
     )
     .addStringOption((opt) => {
       return opt
         .setName("time")
-        .setDescription("Write the time you want to be reminded.")
-        .setRequired(true)
-        .setAutocomplete(true);
+        .setDescription("The time you want to format")
+        .setRequired(true);
+    })
+    .addIntegerOption((opt) => {
+      return opt
+        .setName("date")
+        .setDescription("The date you want to get the time for")
+        .setRequired(true);
     })
     .addStringOption((opt) => {
       return opt
-        .setName("date")
-        .setDescription("Write the date you want to be reminded.")
-        .setRequired(true)
-        .setAutocomplete(true);
+        .setName("month")
+        .setDescription("The month you want to get the time for (default current month)")
+        .setRequired(false)
+        .addChoices(...months);
+    })
+    .addIntegerOption((opt) => {
+      return opt
+        .setName("year")
+        .setDescription(
+          "The year you want to get the time for (uses current year by default)"
+        )
+        .setRequired(false);
     })
     .addStringOption((opt) => {
       return opt
@@ -201,6 +217,16 @@ const commands = [
         .setName("user")
         .setDescription("Write the user you want to get the time for.")
         .setRequired(false);
+    }),
+
+    new SlashCommandBuilder()
+    .setName("reset")
+    .setDescription("Removes your timezone and timers from the database.")
+    .addStringOption((opt) => {
+      return opt
+        .setName("confirm")
+        .setDescription("Type 'confirm' to confirm.")
+        .setRequired(true);
     }),
 ];
 
