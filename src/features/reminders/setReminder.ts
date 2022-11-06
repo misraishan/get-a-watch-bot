@@ -17,32 +17,6 @@ export async function setReminder(interaction: ChatInputCommandInteraction<Cache
     const name = interaction.options.get("name")?.value as string;
     const message = interaction.options.get("message")?.value ? interaction.options.get("message")?.value as string : null;
 
-    const timestampDate = new Intl.DateTimeFormat("en-US", {
-        timeZone: timezone,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-    })
-
-    let timestamp : number;
-    let formattedTimestamp;
-    try {
-        timestamp = dayjs.tz(`${year}-${month}-${date} ${time}`, timezone).valueOf();
-        // console.log(timestamp)
-        formattedTimestamp = timestampDate.format(timestamp);
-    } catch (error) {
-        console.warn(error);
-        await interaction.reply({content: "Invalid date or time!", ephemeral: true});
-        return;
-    }
-
-    if (timestamp >= Date.now() + 7889238000) {
-        await interaction.reply({content: "Valid reminders are within 3 months from now.", ephemeral: true});
-        return;
-    }
-
     if (!timezone) {
         const user = await db.user.findUnique({
             where: {
@@ -56,7 +30,32 @@ export async function setReminder(interaction: ChatInputCommandInteraction<Cache
         timezone = user?.timezone;
     }
 
-    const timer = dayjs.tz(timestamp, timezone).valueOf() - Date.now();
+    const timestampDate = new Intl.DateTimeFormat("en-US", {
+        timeZone: timezone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+    })
+
+    let timestamp : number;
+    let formattedTimestamp;
+    try {
+        timestamp = dayjs.tz(`${year}-${month}-${date} ${time}`, timezone).valueOf();
+        formattedTimestamp = timestampDate.format(timestamp);
+    } catch (error) {
+        console.warn(error);
+        await interaction.reply({content: "Invalid date or time!", ephemeral: true});
+        return;
+    }
+
+    if (timestamp >= Date.now() + 7889238000) {
+        await interaction.reply({content: "Valid reminders are within 3 months from now.", ephemeral: true});
+        return;
+    }
+
+    const timer = timestamp - Date.now();
     if (timer < 0) {
         await interaction.reply({content: "Invalid date or time!", ephemeral: true});
         return;
