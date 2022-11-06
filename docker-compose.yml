@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    expose: [5432]
+    environment:
+      - POSTGRES_PASSWORD=HayHayWasHere
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=botdb
+  bot:
+    image: node:18
+    command: npm run start:prod --prefix /app 
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    environment:
+      - TZ=UTC
