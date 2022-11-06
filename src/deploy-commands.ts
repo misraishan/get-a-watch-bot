@@ -233,6 +233,14 @@ const commands = [
         .setDescription("Type 'confirm' to confirm.")
         .setRequired(true);
     }),
+
+    new SlashCommandBuilder()
+    .setName("info")
+    .setDescription("Get information about the bot."),
+    
+    new SlashCommandBuilder()
+    .setName("commands")
+    .setDescription("Get a list of all commands.")
 ];
 
 config();

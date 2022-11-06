@@ -10,6 +10,7 @@ import { setTimezone } from "./features/timezones";
 import { tzAutocomplete } from "./autocomplete";
 import { setReminder } from "./features/reminders/setReminder";
 import { setUpcomingReminders } from "./features/reminders/upcomingReminders";
+import { commands, info } from "./features/misc";
 
 config();
 
@@ -70,6 +71,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (interaction.commandName == "timestamp") getTimeStamp(interaction);
 
     if (interaction.commandName == "reminder") setReminder(interaction);
+    
+    if (interaction.commandName == "info") info(interaction);
+
+    if (interaction.commandName == "commands") commands(interaction);
   } else if (interaction.isAutocomplete()) {
     if (interaction.options.get("timezone")) tzAutocomplete(interaction);
   }
