@@ -17,10 +17,13 @@ model User {
 }
 
 model Timer {
-  id       String   @id @default(cuid())
-  name     String
-  end      DateTime
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String
-  isActive Boolean  @default(true)
+  id        String  @id @default(uuid())
+  name      String
+  end       Int
+  start     Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  isActive  Boolean @default(true)
+  message   String?
+  timezone  String  @default("America/New_York")
 }

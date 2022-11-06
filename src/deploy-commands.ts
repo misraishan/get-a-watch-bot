@@ -174,6 +174,12 @@ const commands = [
     })
     .addStringOption((opt) => {
       return opt
+        .setName("name")
+        .setDescription("The name of the reminder")
+        .setRequired(true);
+    })
+    .addStringOption((opt) => {
+      return opt
         .setName("month")
         .setDescription("The month you want to get the time for (default current month)")
         .setRequired(false)
@@ -191,8 +197,7 @@ const commands = [
       return opt
         .setName("message")
         .setDescription("Write the message you want to be reminded.")
-        .setRequired(true)
-        .setAutocomplete(true);
+        .setRequired(false);
     })
     .addStringOption((opt) => {
       return opt
