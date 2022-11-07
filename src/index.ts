@@ -22,44 +22,29 @@ export const db = new PrismaClient();
   await client.login(process.env.TOKEN);
 })();
 
-const presence: PresenceData = {};
-
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user?.tag}!`);
-  setUpcomingReminders();
-  client.user?.setPresence({
+function refreshPresence() {
+  const presence: PresenceData = {
     activities: [
       {
-        name: `${client.users.cache.size} users`,
+        name: `${client.guilds.cache.size} servers`,
         type: ActivityType.Watching,
-        url: "https://github.com/hayhay404/get-a-watch-bot",
       },
     ],
-  });
+  };
+  client.user?.setPresence(presence);
+}
+
+client.on("ready", () => {
+  setUpcomingReminders();
+  refreshPresence();
 });
 
 client.on("guildCreate", () => {
-  client.user?.setPresence({
-    activities: [
-      {
-        name: `${client.users.cache.size} users`,
-        type: ActivityType.Watching,
-        url: "https://github.com/hayhay404/get-a-watch-bot",
-      },
-    ],
-  });
+  refreshPresence();
 });
 
 client.on("guildDelete", () => {
-  client.user?.setPresence({
-    activities: [
-      {
-        name: `${client.users.cache.size} users`,
-        type: ActivityType.Watching,
-        url: "https://github.com/hayhay404/get-a-watch-bot",
-      },
-    ],
-  });
+  refreshPresence();
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
