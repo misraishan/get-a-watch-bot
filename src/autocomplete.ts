@@ -1,7 +1,10 @@
 import { AutocompleteInteraction, CacheType } from "discord.js";
-import moment from "moment-timezone";
+import timezones from "timezones-list";
 
-const tzList = moment.tz.names();
+// Get all timezones
+const tzList = timezones.map((timezone) => {
+    return timezone.tzCode;
+});
 
 export async function tzAutocomplete(interaction: AutocompleteInteraction<CacheType>) {
     const maxResults = 20;
