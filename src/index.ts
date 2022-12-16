@@ -28,7 +28,7 @@ async function refreshPresence() {
   const presence: PresenceData = {
     activities: [
       {
-        name: `${total} users`,
+        name: `${total} servers`,
         type: ActivityType.Watching,
       },
     ],
