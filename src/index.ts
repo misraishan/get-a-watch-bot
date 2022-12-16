@@ -22,11 +22,13 @@ export const db = new PrismaClient();
   await client.login(process.env.TOKEN);
 })();
 
-function refreshPresence() {
+async function refreshPresence() {
+  const total = await client.guilds.fetch().then((guilds) => guilds.size);
+  
   const presence: PresenceData = {
     activities: [
       {
-        name: `${client.guilds.cache.size} servers`,
+        name: `${total} users`,
         type: ActivityType.Watching,
       },
     ],
