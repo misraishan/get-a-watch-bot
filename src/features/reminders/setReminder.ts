@@ -141,6 +141,11 @@ export async function setReminder(
       \n\nIF SOMETHING WENT WRONG, IT'S SOMEWHERE HERE I THINK
       \n\n\n\nI'M SORRY!`
     );
-    console.log(error);
+    await interaction.reply({
+      content:
+        "An error occurred while creating your reminder!\nIf this is an error, dm <@749490210508898325> with a screenshot",
+      ephemeral: true,
+    });
+    console.error(error);
   }
 }

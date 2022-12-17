@@ -5,7 +5,6 @@ export async function setTimezone(
   interaction: ChatInputCommandInteraction<CacheType>
 ) {
   const value: string = interaction.options.get("timezone")?.value as string;
-  await interaction.reply("Successfully set your timezone to " + value + "!");
 
   try {
     const user = interaction.user;
@@ -21,7 +20,14 @@ export async function setTimezone(
         timezone: value,
       },
     });
+
+    await interaction.reply("Successfully set your timezone to " + value + "!");
   } catch (error) {
-    console.log(error);
+    await interaction.reply({
+      content:
+        "An error occurred while setting your timezone!\nIf this is an error, dm <@749490210508898325> with a screenshot",
+      ephemeral: true,
+    });
+    console.error(error);
   }
 }

@@ -60,7 +60,7 @@ export async function getTime(interaction: ChatInputCommandInteraction<CacheType
         await interaction.reply({ embeds: [embed] });
         return;
     } catch (error) {
-        await interaction.reply({content: "An error occurred while getting the time!", ephemeral: true});
+        await interaction.reply({content: "An error occurred while getting the time!\nIf this is an error, dm <@749490210508898325> with a screenshot", ephemeral: true});
         console.error(error);
         return;
     }

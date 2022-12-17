@@ -88,6 +88,11 @@ export async function commands(
   try {
     await interaction.reply({ embeds: [embed] });
   } catch (error) {
+    await interaction.reply({
+      content:
+        "This err msg should never appear... DM <@749490210508898325> with a screenshot...",
+      ephemeral: true,
+    });
     console.log(error);
   }
 }

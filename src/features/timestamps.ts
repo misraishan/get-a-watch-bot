@@ -101,11 +101,12 @@ export async function getTimeStamp(
       ephemeral: !ephemeral,
     });
   } catch (error) {
-    console.warn(error);
     await interaction.reply({
-      content: "Something went wrong...",
+      content:
+        "An error occurred while creating the timestamp!\nIf this is an error, dm <@749490210508898325> with a screenshot",
       ephemeral: true,
     });
+    console.error(error);
     return;
   }
 }
