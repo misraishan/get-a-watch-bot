@@ -1,10 +1,22 @@
 import { ChatInputCommandInteraction, CacheType } from "discord.js";
 import { db } from "..";
+import { tzList } from "../autocomplete";
 
 export async function setTimezone(
   interaction: ChatInputCommandInteraction<CacheType>
 ) {
   const value: string = interaction.options.get("timezone")?.value as string;
+  const isInList = tzList.filter((tz: string) =>
+    tz.toLowerCase().includes(value.toLowerCase())
+  );
+
+  if (isInList.length === 0) {
+    await interaction.reply({
+      content: "Please provide a valid timezone!",
+      ephemeral: true,
+    });
+    return;
+  }
 
   try {
     const user = interaction.user;

@@ -2,7 +2,7 @@ import { AutocompleteInteraction, CacheType } from "discord.js";
 import timezones from "timezones-list";
 
 // Get all timezones
-const tzList = timezones.map((timezone) => {
+export const tzList = timezones.map((timezone) => {
     return timezone.tzCode;
 });
 
