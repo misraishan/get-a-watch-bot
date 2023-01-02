@@ -26,7 +26,7 @@ export async function info(
       },
       {
         name: "Support Server",
-        value: "[Join the support server](https://discord.gg/Z8qkEJMp5w)",
+        value: "[Join the support server](https://discord.gg/wRvPsZG5r7)",
       },
       {
         name: "Commands",
