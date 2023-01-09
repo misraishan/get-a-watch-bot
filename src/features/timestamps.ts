@@ -8,6 +8,7 @@ import { db } from "..";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import DayJSTimezone from "dayjs/plugin/timezone";
+import consola from "consola";
 dayjs.extend(utc);
 dayjs.extend(DayJSTimezone);
 
@@ -106,7 +107,7 @@ export async function getTimeStamp(
         "An error occurred while creating the timestamp!\nIf this is an error, dm <@749490210508898325> with a screenshot",
       ephemeral: true,
     });
-    console.error(error);
+    consola.error("Time is (in func timestamp): " + Date.now() + error);
     return;
   }
 }

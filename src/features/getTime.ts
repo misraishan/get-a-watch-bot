@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import advance from "dayjs/plugin/advancedFormat";
+import consola from "consola";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(advance);
@@ -85,7 +86,7 @@ export async function getTime(
         "An error occurred while getting the time!\nIf this is an error, dm <@749490210508898325> with a screenshot or join the support server",
       ephemeral: true,
     });
-    console.error(error);
+    consola.error("Time is (in func getTime): " + Date.now() + error);
     return;
   }
 }

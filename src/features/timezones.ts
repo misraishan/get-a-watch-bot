@@ -1,6 +1,7 @@
 import { ChatInputCommandInteraction, CacheType } from "discord.js";
 import { db } from "..";
 import { tzList } from "../autocomplete";
+import consola from "consola"
 
 export async function setTimezone(
   interaction: ChatInputCommandInteraction<CacheType>
@@ -40,6 +41,6 @@ export async function setTimezone(
         "An error occurred while setting your timezone!\nIf this is an error, dm <@749490210508898325> with a screenshot",
       ephemeral: true,
     });
-    console.error(error);
+    consola.error("Time is (in func setTZ): " + Date.now() + error);
   }
 }

@@ -8,6 +8,7 @@ import { db } from "../..";
 import DayJSTimezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { newReminderRefresh } from "./upcomingReminders";
+import consola from "consola";
 dayjs.extend(utc);
 dayjs.extend(DayJSTimezone);
 
@@ -136,16 +137,16 @@ export async function setReminder(
       });
     }
   } catch (error) {
-    console.log(
+    console.error(
       `I GOT VERY LAZY HERE AND JUST WRAPPED THE ENTIRE SET REMINDER FUNCTION IN A TRY CATCH BLOCK...
       \n\nIF SOMETHING WENT WRONG, IT'S SOMEWHERE HERE I THINK
       \n\n\n\nI'M SORRY!`
     );
+    consola.error("Time is (in func setReminder): " + Date.now() + error);
     await interaction.reply({
       content:
         "An error occurred while creating your reminder!\nIf this is an error, dm <@749490210508898325> with a screenshot",
       ephemeral: true,
     });
-    console.error(error);
   }
 }

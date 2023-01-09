@@ -1,3 +1,4 @@
+import consola from "consola";
 import {
   ChatInputCommandInteraction,
   CacheType,
@@ -93,6 +94,6 @@ export async function commands(
         "This err msg should never appear... DM <@749490210508898325> with a screenshot...",
       ephemeral: true,
     });
-    console.log(error);
+    consola.error("Time is (in func info): " + Date.now() + error);
   }
 }

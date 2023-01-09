@@ -1,4 +1,5 @@
 import { Timer } from "@prisma/client";
+import consola from "consola";
 import { inlineCode, codeBlock } from "discord.js";
 import { db, client } from "../..";
 
@@ -17,7 +18,7 @@ export async function setUpcomingReminders() {
       },
     });
   } catch (error) {
-    console.log(error);
+    consola.error("Time is (in func setUpcomingTimer): " + Date.now() + error);
   }
 
   if (timestamps) {
@@ -52,7 +53,7 @@ async function setReminderTimer(reminder: Timer) {
         },
       });
     } catch (error) {
-      console.log(error);
+      consola.error("Time is (in func setReminderTimer): " + Date.now() + error);
     }
   }, reminder.end * 1000 - Date.now());
 }

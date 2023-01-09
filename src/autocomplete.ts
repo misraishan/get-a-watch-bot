@@ -1,3 +1,4 @@
+import consola from "consola";
 import { AutocompleteInteraction, CacheType } from "discord.js";
 import timezones from "timezones-list";
 
@@ -23,6 +24,6 @@ export async function tzAutocomplete(interaction: AutocompleteInteraction<CacheT
             results.map(tz => ({ name: tz, value: tz })),
         );
     } catch (error) {
-        console.error(error);
+        consola.error("Time is (in func tzAutoComp): " + Date.now() + error);
     }
 }

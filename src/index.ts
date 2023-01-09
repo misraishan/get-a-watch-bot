@@ -23,7 +23,7 @@ export const db = new PrismaClient();
 })();
 
 async function refreshPresence() {
-  const total = await client.guilds.fetch().then((guilds) => guilds.size);
+  const total = client.guilds.cache.size;
   
   const presence: PresenceData = {
     activities: [
@@ -37,6 +37,7 @@ async function refreshPresence() {
 }
 
 client.on("ready", () => {
+  console.log("Ready at time " + Date.now() + "!");
   setUpcomingReminders();
   refreshPresence();
 });
