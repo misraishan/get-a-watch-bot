@@ -8,8 +8,8 @@ import { getTime } from "./features/getTime";
 import { getTimeStamp } from "./features/timestamps";
 import { setTimezone } from "./features/timezones";
 import { tzAutocomplete } from "./autocomplete";
-import { setReminder } from "./features/reminders/setReminder";
-import { setUpcomingReminders } from "./features/reminders/upcomingReminders";
+// import { setReminder } from "./features/reminders/setReminder";
+// import { setUpcomingReminders } from "./features/reminders/upcomingReminders";
 import { commands, info } from "./features/misc";
 
 config();
@@ -38,7 +38,7 @@ async function refreshPresence() {
 
 client.on("ready", () => {
   console.log("Ready at time " + Date.now() + "!");
-  setUpcomingReminders();
+  // setUpcomingReminders();
   refreshPresence();
 });
 
@@ -58,7 +58,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
     if (interaction.commandName == "timestamp") getTimeStamp(interaction);
 
-    if (interaction.commandName == "reminder") setReminder(interaction);
+    // if (interaction.commandName == "reminder") setReminder(interaction);
     
     if (interaction.commandName == "info") info(interaction);
 

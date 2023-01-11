@@ -76,10 +76,10 @@ export async function commands(
         value:
           "Converts a time and date in your local timezone to a discord dynamic timestamp",
       },
-      {
-        name: "/reminder",
-        value: "Sets a reminder\nThe bot will DM you when the reminder is due",
-      }
+      // {
+      //   name: "/reminder",
+      //   value: "Sets a reminder\nThe bot will DM you when the reminder is due",
+      // }
     )
     .setColor("Purple")
     .setFooter({

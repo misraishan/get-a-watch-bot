@@ -155,57 +155,57 @@ const commands = [
 
   // Command to remind the user when a specific time is hit
   // Input: Time, Date, Month, Year, Timezone, Message
-  new SlashCommandBuilder()
-    .setName("reminder")
-    .setDescription(
-      "Remind the user when a specific time is hit."
-    )
-    .addStringOption((opt) => {
-      return opt
-        .setName("time")
-        .setDescription("The time you want to format")
-        .setRequired(true);
-    })
-    .addIntegerOption((opt) => {
-      return opt
-        .setName("date")
-        .setDescription("The date you want to get the time for")
-        .setRequired(true);
-    })
-    .addStringOption((opt) => {
-      return opt
-        .setName("name")
-        .setDescription("The name of the reminder")
-        .setRequired(true);
-    })
-    .addStringOption((opt) => {
-      return opt
-        .setName("month")
-        .setDescription("The month you want to get the time for (default current month)")
-        .setRequired(false)
-        .addChoices(...months);
-    })
-    .addIntegerOption((opt) => {
-      return opt
-        .setName("year")
-        .setDescription(
-          "The year you want to get the time for (uses current year by default)"
-        )
-        .setRequired(false);
-    })
-    .addStringOption((opt) => {
-      return opt
-        .setName("message")
-        .setDescription("Write the message you want to be reminded.")
-        .setRequired(false);
-    })
-    .addStringOption((opt) => {
-      return opt
-        .setName("timezone")
-        .setDescription("Write your timezone.")
-        .setRequired(false)
-        .setAutocomplete(true);
-    }),
+  // new SlashCommandBuilder()
+  //   .setName("reminder")
+  //   .setDescription(
+  //     "Remind the user when a specific time is hit."
+  //   )
+  //   .addStringOption((opt) => {
+  //     return opt
+  //       .setName("time")
+  //       .setDescription("The time you want to format")
+  //       .setRequired(true);
+  //   })
+  //   .addIntegerOption((opt) => {
+  //     return opt
+  //       .setName("date")
+  //       .setDescription("The date you want to get the time for")
+  //       .setRequired(true);
+  //   })
+  //   .addStringOption((opt) => {
+  //     return opt
+  //       .setName("name")
+  //       .setDescription("The name of the reminder")
+  //       .setRequired(true);
+  //   })
+  //   .addStringOption((opt) => {
+  //     return opt
+  //       .setName("month")
+  //       .setDescription("The month you want to get the time for (default current month)")
+  //       .setRequired(false)
+  //       .addChoices(...months);
+  //   })
+  //   .addIntegerOption((opt) => {
+  //     return opt
+  //       .setName("year")
+  //       .setDescription(
+  //         "The year you want to get the time for (uses current year by default)"
+  //       )
+  //       .setRequired(false);
+  //   })
+  //   .addStringOption((opt) => {
+  //     return opt
+  //       .setName("message")
+  //       .setDescription("Write the message you want to be reminded.")
+  //       .setRequired(false);
+  //   })
+  //   .addStringOption((opt) => {
+  //     return opt
+  //       .setName("timezone")
+  //       .setDescription("Write your timezone.")
+  //       .setRequired(false)
+  //       .setAutocomplete(true);
+  //   }),
 
   new SlashCommandBuilder()
     .setName("time")
